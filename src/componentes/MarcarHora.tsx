@@ -10,7 +10,6 @@ const MarcarHora = () => {
     alert('Nao foi possivel identificar o usuário');
     navigate('/');
   }
-  navigate('/');
   const [hours, setHours] = useState<string | null>(null);
   const [startHour, setStartHour] = useState<string | null>(null);
   const [endHour, setEndHour] = useState<string | null>(null);
