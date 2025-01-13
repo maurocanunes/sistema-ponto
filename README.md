@@ -1,70 +1,67 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sistema Ponto Ilumeo
 
-## Available Scripts
+Este projeto é um case técnico para uma vaga de programaor JR. Full Stack na empresa Ilumeo.
 
-In the project directory, you can run:
+### Foram feitas algumas suposições referentes a este projeto.
 
-### `npm start`
+#### Usuários
+- Não se possui informação de quantos usuários existem e tão pouco possuo acesso a seus registros.
+- Qualquer usuário pode entrar no sistema e controlar seu tempo.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Jornada de trabalho
+- Parti do princípio que ninguém registra seu ponto mais de uma vez no dia.
+- O trabalho iniciado em um dia termina no mesmo dia, ou seja, não há a possibilidade de se começar hoje e terminar amanhã.
+- Uma vez que no dia foi dado início só será possível marcar a saída (que resulta no cálculo do trabalho do dia)
+- Uma vez que início e saída estejam registrados, nesta data não poderá mais ter outro registro.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Informações relevantes
 
-### `npm test`
+#### Banco de dados
+- Ao utilizar AWS DynamoDB entende-se que consultas excessívas e longas custam mais caro, por isso optei por ter redundância de dados e guardar as horas trabalhadas junto do registro do usuário.
+- Caso fosse utilizado PostgreSQL seria utilizada outra estruturação de dados.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### AWS Lambda Function
+- Foi criado uma function em Node.js para realizar toda a parte do lado do servidor.
+- Esta function realiza todas as ações necessárias.
 
-### `npm run build`
+#### Rect
+- Foi utilizado Ract v19 para desenvolvimento.
+- O projeto foi desenvolvido em TypeScript
+- Foram utilizadas as seguintes dependências
+    - [@tachyons](https://tachyons.io/)
+    - [@styled-components](https://styled-components.com/)
+    - [@prettier](https://prettier.io/)
+    - [@eslint](https://eslint.org/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Rode localmente
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Clone o projeto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+  git clone https://github.com/maurocanunes/sistema-ponto
+```
 
-### `npm run eject`
+Vá para a pasta do projeto
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+  cd my-project
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Instale as dependências
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+  npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Inicie o servidor
 
-## Learn More
+```bash
+  npm run start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Autor
 
-### Code Splitting
+- [@maurocanunes](https://github.com/maurocanunes)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
