@@ -49,6 +49,7 @@ export const getTodayWork = async (user_id: string | undefined) => {
     .then((response) => response.text())
     .then((result) => {
       const todayWorked = JSON.parse(result);
+      if (todayWorked.length === 0) return null;
       return todayWorked[0];
     })
     .catch((error) => {

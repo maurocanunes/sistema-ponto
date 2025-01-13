@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getTodayWork, setHour } from '../handlers/ApiConnection';
+import {
+  Box,
+  Buttons,
+  ButtonsBox,
+  Label,
+  StyledH1,
+  StyledH2,
+  StyledHighlight,
+  Wrapper,
+} from './styles';
 
 const MarcarHora = () => {
   const navigate = useNavigate();
   const { user_id } = useParams();
-  console.log(user_id);
   if (user_id === undefined || user_id === null) {
     alert('Nao foi possivel identificar o usuário');
     navigate('/');
@@ -48,117 +57,44 @@ const MarcarHora = () => {
   };
 
   return (
-    <div style={styles.container}>
-      {/* Header */}
-      <div style={styles.header}>
-        <h2 style={{ margin: '5px' }}>Relógio de ponto</h2>
-        <p style={{ margin: '5px' }}>Usuário</p>
-        <p style={{ margin: '5px', fontWeight: 'bold' }}>{user_id}</p>
-      </div>
+    <Wrapper>
+      <Box>
+        {/* <div style={styles.container}> */}
+        {/* Header */}
+        <StyledH1>
+          Ponto <StyledHighlight>Ilumeo</StyledHighlight>
+        </StyledH1>
+        <StyledH2>Usuário: {user_id}</StyledH2>
 
-      {/* Timer */}
-      <div style={styles.timer}>
-        {hours ? (
-          <>
-            <p style={{ margin: '5px' }}>Horas de hoje</p>
-            <h1 style={{ margin: '5px', fontSize: '36px' }}>{hours}</h1>
-          </>
-        ) : (
-          <>
-            <p style={{ margin: '5px' }}>Inicio do dia</p>
-            <h1 style={{ margin: '5px', fontSize: '36px' }}>{startHour}</h1>
-          </>
-        )}
-      </div>
+        {/* Hours */}
+        <Label>{hours ? 'Horas de hoje' : 'Inicio do dia às'}</Label>
+        <StyledH1>{hours || startHour}</StyledH1>
 
-      {/* Buttons */}
-      <div style={styles.buttons}>
-        <button
-          onClick={() => handleStartStop(true)}
-          disabled={hours !== null || startHour !== null}
-          style={
-            hours !== null || startHour !== null
-              ? styles.buttonDisabled
-              : styles.button
-          }
-        >
-          Entrar
-        </button>
-        <button
-          onClick={() => handleStartStop(false)}
-          disabled={hours !== null || startHour === null}
-          style={
-            hours !== null || startHour === null
-              ? styles.buttonDisabled
-              : styles.button
-          }
-        >
-          Sair
-        </button>
-      </div>
-
-      {/* View History Button */}
-      <div style={styles.buttons}>
-        <button onClick={checkWeekHours} style={styles.button}>
-          Ver Histórico
-        </button>
-        <button onClick={() => navigate('/')} style={styles.button}>
-          Voltar
-        </button>
-      </div>
-    </div>
+        {/* Buttons */}
+        <ButtonsBox>
+          <Buttons
+            onClick={() => handleStartStop(true)}
+            isDisabled={hours !== null || startHour !== null}
+          >
+            Entrar
+          </Buttons>
+          <Buttons
+            onClick={() => handleStartStop(false)}
+            isDisabled={hours !== null || startHour === null}
+          >
+            Sair
+          </Buttons>
+        </ButtonsBox>
+        <ButtonsBox>
+          <Buttons onClick={checkWeekHours} isDisabled={false}>
+            Ver Histórico
+          </Buttons>
+          <Buttons onClick={() => navigate('/')} isDisabled={false}>
+            Voltar
+          </Buttons>
+        </ButtonsBox>
+      </Box>
+    </Wrapper>
   );
-};
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-    fontFamily: 'Arial, sans-serif',
-    padding: '20px',
-    '@media (maxWidth: 768px)': {
-      flexWrap: 'wrap' as const,
-      alignItems: 'stretch',
-    },
-  },
-  header: {
-    textAlign: 'center' as const,
-    marginBottom: '20px',
-  },
-  timer: {
-    textAlign: 'center' as const,
-    marginBottom: '20px',
-  },
-  buttons: {
-    display: 'flex',
-    gap: '20px',
-    marginBottom: '20px',
-  },
-  buttonsDisabled: {
-    display: 'flex',
-    gap: '20px',
-    marginBottom: '20px',
-    cursor: 'not-allowed',
-  },
-  button: {
-    backgroundColor: '#FF9900',
-    color: '#fff',
-    border: 'none',
-    padding: '10px 20px',
-    fontSize: '16px',
-    cursor: 'pointer',
-    borderRadius: '4px',
-  },
-  buttonDisabled: {
-    backgroundColor: '#ccc',
-    color: '#000',
-    border: 'none',
-    padding: '10px 20px',
-    fontSize: '16px',
-    cursor: 'not-allowed',
-    borderRadius: '4px',
-  },
 };
 export default MarcarHora;
